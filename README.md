@@ -8,6 +8,22 @@ This project is developed as part of my college practical assignment to practice
 
 The Student Attendance Management System helps manage student details, subjects, and attendance records using Django.
 
+## 📸 Project Screenshots
+
+### 1. Dashboard
+
+![Student Attendance Dashboard](![Uploading Screenshot 2026-10-15 214249.png…]()
+/dashboard.png)
+
+### 2. Student Management
+
+![Student Management](screenshots/students.png)
+
+### 3. Attendance Management
+
+![Attendance Management](screenshots/attendance.png)
+
+
 ## ✨ Features
 
 * Add, view, edit, and delete student records.
