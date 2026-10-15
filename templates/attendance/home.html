@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AttendEase | Student Attendance Management</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f6fc;
+            color: #292c48;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 245px;
+            background: white;
+            padding: 30px 20px;
+            border-right: 1px solid #ececf4;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 800;
+            color: #6155d9;
+            margin-bottom: 42px;
+        }
+
+        .logo span {
+            color: #292c48;
+        }
+
+        .menu-title {
+            color: #a1a3b8;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            margin: 25px 12px 12px;
+        }
+
+        .menu a {
+            display: block;
+            color: #777b96;
+            padding: 14px 13px;
+            border-radius: 10px;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #efedff;
+            color: #6155d9;
+        }
+
+        .sidebar-bottom {
+            margin-top: 45px;
+            padding: 18px;
+            background: linear-gradient(135deg, #6558dc, #9186f6);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .sidebar-bottom h4 {
+            font-size: 13px;
+            margin-bottom: 9px;
+        }
+
+        .sidebar-bottom p {
+            font-size: 11px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* MAIN CONTENT */
+
+        .main {
+            flex: 1;
+            min-width: 0;
+            padding: 32px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            font-size: 25px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .topbar p {
+            font-size: 13px;
+            color: #9093a9;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 13px;
+            background: #e9e6ff;
+            color: #6155d9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .profile-info strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .profile-info small {
+            color: #9093a9;
+            font-size: 11px;
+        }
+
+        /* WELCOME BANNER */
+
+        .welcome {
+            background: linear-gradient(115deg, #6155d9, #887cf0);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 28px;
+            box-shadow: 0 12px 30px rgba(97, 85, 217, 0.15);
+        }
+
+        .welcome h2 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            font-size: 13px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .welcome-icon {
+            font-size: 55px;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            padding: 11px 15px;
+            border-radius: 9px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #6155d9;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5045c4;
+        }
+
+        .btn-light {
+            background: white;
+            color: #6155d9;
+            border-color: #e6e5f3;
+        }
+
+        .btn-edit {
+            background: #edf3ff;
+            color: #4676d7;
+            padding: 8px 10px;
+            font-size: 11px;
+        }
+
+        .btn-delete {
+            background: #fff0f0;
+            color: #df626b;
+            padding: 8px 10px;
+            font-size: 11px;
+        }
+
+        /* STATISTICS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #ededf5;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 5px 18px rgba(38, 40, 80, 0.025);
+        }
+
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 19px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #898ca5;
+            font-weight: 600;
+        }
+
+        .stat-icon {
+            width: 39px;
+            height: 39px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            font-size: 19px;
+        }
+
+        .purple {
+            background: #efedff;
+        }
+
+        .green {
+            background: #e5f9f0;
+        }
+
+        .orange {
+            background: #fff2df;
+        }
+
+        .blue {
+            background: #e7f2ff;
+        }
+
+        .stat-number {
+            font-size: 29px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .stat-note {
+            font-size: 11px;
+            color: #9295aa;
+        }
+
+        /* CONTENT SECTIONS */
+
+        .section {
+            background: white;
+            border: 1px solid #ededf5;
+            border-radius: 17px;
+            padding: 24px;
+            margin-bottom: 27px;
+            box-shadow: 0 5px 18px rgba(38, 40, 80, 0.025);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .section-header h2 {
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        .section-header p {
+            font-size: 12px;
+            color: #9295aa;
+        }
+
+        .count {
+            background: #efedff;
+            color: #6155d9;
+            padding: 7px 11px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* TABLES */
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;
+        }
+
+        th {
+            background: #f8f8fc;
+            color: #8a8da5;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            padding: 15px 13px;
+            text-align: left;
+        }
+
+        td {
+            padding: 17px 13px;
+            border-bottom: 1px solid #f0f0f6;
+            font-size: 12px;
+            color: #686b84;
+        }
+
+        tbody tr:hover {
+            background: #fafaff;
+        }
+
+        .student-name {
+            color: #292c48;
+            font-weight: 700;
+        }
+
+        .enrollment {
+            color: #8d90a7;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* ATTENDANCE BADGES */
+
+        .badge {
+            display: inline-block;
+            padding: 7px 10px;
+            border-radius: 7px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .badge-present {
+            background: #e5f9f0;
+            color: #199c69;
+        }
+
+        .badge-absent {
+            background: #fff0f0;
+            color: #dc626b;
+        }
+
+        /* PROGRESS BAR */
+
+        .percentage {
+            font-weight: 800;
+            color: #292c48;
+            margin-bottom: 8px;
+        }
+
+        .progress {
+            width: 100px;
+            height: 6px;
+            border-radius: 10px;
+            background: #eeeef6;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #6558dc, #9388f5);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* SUBJECTS */
+
+        .subject-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .subject-chip {
+            background: #f2f0ff;
+            color: #6155d9;
+            border: 1px solid #e7e3ff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #9295aa;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 11px;
+            color: #a1a3b5;
+            line-height: 1.8;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 1200px) {
+            .stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 18px;
+            }
+
+            .logo {
+                margin-bottom: 20px;
+            }
+
+            .menu-title,
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .menu {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .menu a {
+                padding: 10px;
+                margin: 0;
+                font-size: 11px;
+            }
+
+            .main {
+                padding: 18px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
+
+            .topbar h1 {
+                font-size: 20px;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .welcome {
+                padding: 22px;
+            }
+
+            .welcome h2 {
+                font-size: 19px;
+            }
+
+            .welcome-icon {
+                font-size: 35px;
+            }
+
+            .stats {
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            .stat-number {
+                font-size: 24px;
+            }
+
+            .stat-icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            .section-header {
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-icon {
+                display: none;
+            }
+
+            .actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">✦ Attend<span>Ease</span></div>
+
+        <p class="menu-title">MAIN MENU</p>
+
+        <nav class="menu">
+
+            <a href="{% url 'home' %}" class="active">
+                ▦ &nbsp; Dashboard
+            </a>
+
+            <a href="#students">
+                ♙ &nbsp; Students
+            </a>
+
+            <a href="#subjects">
+                ▤ &nbsp; Subjects
+            </a>
+
+            <a href="#attendance">
+                ◷ &nbsp; Attendance
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <h4>📚 Stay Organized!</h4>
+
+            <p>
+                Manage student records and track attendance
+                easily from one place.
+            </p>
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div>
+                <h1>Attendance Overview 👋</h1>
+
+                <p>
+                    Welcome! Here's your student attendance dashboard.
+                </p>
+            </div>
+
+            <div class="profile">
+
+                <div class="avatar">PB</div>
+
+                <div class="profile-info">
+                    <strong>Poonam Bhavsar</strong>
+                    <small>Attendance Manager</small>
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- WELCOME BANNER -->
+
+        <section class="welcome">
+
+            <div>
+
+                <h2>Student Attendance Management</h2>
+
+                <p>
+                    Manage students, add subjects and record daily attendance.
+                    <br>
+                    Everything you need, all in one place.
+                </p>
+
+            </div>
+
+            <div class="welcome-icon">📊</div>
+
+        </section>
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="actions">
+
+            <a class="btn btn-primary" href="{% url 'add_student' %}">
+                ＋ Add Student
+            </a>
+
+            <a class="btn btn-light" href="{% url 'add_subject' %}">
+                ＋ Add Subject
+            </a>
+
+            <a class="btn btn-light" href="{% url 'add_attendance' %}">
+                ✓ Mark Attendance
+            </a>
+
+        </div>
+
+        <!-- STATISTICS CARDS -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span class="stat-label">Total Students</span>
+                    <span class="stat-icon purple">♙</span>
+                </div>
+
+                <div class="stat-number">
+                    {{ student_data|length }}
+                </div>
+
+                <div class="stat-note">Registered students</div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span class="stat-label">Total Subjects</span>
+                    <span class="stat-icon green">▤</span>
+                </div>
+
+                <div class="stat-number">
+                    {{ subjects|length }}
+                </div>
+
+                <div class="stat-note">Available subjects</div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span class="stat-label">Attendance Records</span>
+                    <span class="stat-icon orange">◷</span>
+                </div>
+
+                <div class="stat-number">
+                    {{ attendance_records|length }}
+                </div>
+
+                <div class="stat-note">Recorded entries</div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span class="stat-label">Average Attendance</span>
+                    <span class="stat-icon blue">↗</span>
+                </div>
+
+                <div class="stat-number">
+                    {{ average_attendance|default:0|floatformat:1 }}%
+                </div>
+
+                <div class="stat-note">Average across all students</div>
+
+            </div>
+
+        </section>
+
+        <!-- STUDENT ATTENDANCE TABLE -->
+
+        <section class="section" id="students">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Student Attendance</h2>
+
+                    <p>
+                        View students and their attendance performance.
+                    </p>
+                </div>
+
+                <span class="count">
+                    {{ student_data|length }} Students
+                </span>
+
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Student Details</th>
+                            <th>Course</th>
+                            <th>Semester</th>
+                            <th>Total Classes</th>
+                            <th>Present</th>
+                            <th>Attendance</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for item in student_data %}
+
+                        <tr>
+
+                            <td>
+                                <div class="student-name">
+                                    {{ item.student.name }}
+                                </div>
+
+                                <div class="enrollment">
+                                    {{ item.student.enrollment_no }}
+                                </div>
+                            </td>
+
+                            <td>{{ item.student.course }}</td>
+
+                            <td>{{ item.student.semester }}</td>
+
+                            <td>{{ item.total }}</td>
+
+                            <td>{{ item.present }}</td>
+
+                            <td>
+
+                                <div class="percentage">
+                                    {{ item.percentage|floatformat:1 }}%
+                                </div>
+
+                                <div class="progress">
+
+                                    <div class="progress-bar"
+                                         data-percentage="{{ item.percentage }}">
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <a class="btn btn-edit"
+                                   href="{% url 'edit_student' item.student.id %}">
+                                    Edit
+                                </a>
+
+                                <a class="btn btn-delete"
+                                   href="{% url 'delete_student' item.student.id %}">
+                                    Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="7" class="empty">
+
+                                <div style="font-size: 30px; margin-bottom: 10px;">
+                                    📋
+                                </div>
+
+                                <strong>No students added yet</strong>
+
+                                <p style="margin-top: 8px;">
+                                    Start by adding your first student.
+                                </p>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- SUBJECTS -->
+
+        <section class="section" id="subjects">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Available Subjects</h2>
+
+                    <p>
+                        Subjects configured in the system.
+                    </p>
+                </div>
+
+                <a href="{% url 'add_subject' %}"
+                   class="btn btn-primary">
+                    ＋ Add Subject
+                </a>
+
+            </div>
+
+            <div class="subject-list">
+
+                {% for subject in subjects %}
+
+                    <div class="subject-chip">
+                        📘 {{ subject.subject_name }}
+                    </div>
+
+                {% empty %}
+
+                    <p class="empty">No subjects added yet.</p>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+        <!-- ATTENDANCE RECORDS -->
+
+        <section class="section" id="attendance">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Attendance Records</h2>
+
+                    <p>
+                        Review and update attendance entries.
+                    </p>
+                </div>
+
+                <a href="{% url 'add_attendance' %}"
+                   class="btn btn-primary">
+                    ＋ Mark Attendance
+                </a>
+
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Student</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for record in attendance_records %}
+
+                        <tr>
+
+                            <td class="student-name">
+                                {{ record.student.name }}
+                            </td>
+
+                            <td>
+                                {{ record.subject.subject_name }}
+                            </td>
+
+                            <td>
+                                {{ record.date|date:"d M Y" }}
+                            </td>
+
+                            <td>
+
+                                {% if record.status == 'Present' %}
+
+                                    <span class="badge badge-present">
+                                        ✓ Present
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge badge-absent">
+                                        ✕ Absent
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <a class="btn btn-edit"
+                                   href="{% url 'edit_attendance' record.id %}">
+                                    Edit
+                                </a>
+
+                                <a class="btn btn-delete"
+                                   href="{% url 'delete_attendance' record.id %}">
+                                    Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="5" class="empty">
+                                No attendance records available yet.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+             Student Attendance Management System
+            <br>
+            Poonam Bhavsar
+        </footer>
+
+    </main>
+
+</div>
+
+<!-- PROGRESS BAR JAVASCRIPT -->
+
+<script>
+    document.querySelectorAll('.progress-bar').forEach(function(bar) {
+
+        let percentage = parseFloat(bar.dataset.percentage) || 0;
+
+        percentage = Math.max(0, Math.min(100, percentage));
+
+        bar.style.width = percentage + '%';
+
+    });
+</script>
+
+</body>
+</html>
