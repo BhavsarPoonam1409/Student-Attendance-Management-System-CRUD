@@ -15,7 +15,7 @@ The Student Attendance Management System helps manage student details, subjects,
 
 ### 1. Dashboard
 
-![Student Attendance Dashboard](screenshots/dashboard.png)
+![image alt](https://github.com/BhavsarPoonam1409/simple-study-tracker/blob/dashboard.png)
 
 ### 2. Student Management
 
