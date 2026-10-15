@@ -15,17 +15,17 @@ The Student Attendance Management System helps manage student details, subjects,
 
 ### 1. Dashboard
 ![Dashboard](Qus2_Student_Attendance_Management_System/screenshots/dashboard.png)
-
-
+<br><br>
 
 ### 2. Student Attendance
 ![Student Attendance](Qus2_Student_Attendance_Management_System/screenshots/Student%20Attendanace.png)
 
-
+<br><br>
 
 ### 3. Attendance Records
 ![Attendance Records](Qus2_Student_Attendance_Management_System/screenshots/Attendance%20Records.png)
 
+<br><br>
 ## ✨ Features
 
 * Add, view, edit, and delete student records.
