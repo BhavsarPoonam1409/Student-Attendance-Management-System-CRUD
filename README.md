@@ -1,7 +1,6 @@
 
 # Student-Attendance-Management-System-CRUD
 
-# Student Attendance Management System
 
 **College Practical Assignment — Question 2**
 
