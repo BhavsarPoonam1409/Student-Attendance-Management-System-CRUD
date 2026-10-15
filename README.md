@@ -15,6 +15,7 @@ The Student Attendance Management System helps manage student details, subjects,
 
 ### 1. Dashboard
 ![Dashboard](Qus2_Student_Attendance_Management_System/screenshots/dashboard.png)
+
 <br><br>
 
 ### 2. Student Attendance
