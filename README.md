@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 # Student-Attendance-Management-System-CRUD
-=======
+
 # Student Attendance Management System
 
 **College Practical Assignment — Question 2**
@@ -14,17 +14,13 @@ The Student Attendance Management System helps manage student details, subjects,
 ## 📸 Project Screenshots
 
 ### 1. Dashboard
+![Dashboard](Qus2_Student_Attendance_Management_System/screenshots/dashboard.png)
 
-![image alt](https://github.com/BhavsarPoonam1409/simple-study-tracker/blob/dashboard.png)
+### 2. Student Attendance
+![Student Attendance](Qus2_Student_Attendance_Management_System/screenshots/Student%20Attendanace.png)
 
-### 2. Student Management
-
-![Student Management](screenshots/students.png)
-
-### 3. Attendance Management
-
-![Attendance Management](screenshots/attendance.png)
-
+### 3. Attendance Records
+![Attendance Records](Qus2_Student_Attendance_Management_System/screenshots/Attendance%20Records.png)
 
 ## ✨ Features
 
@@ -97,4 +93,4 @@ The objective of this assignment is to understand Django fundamentals, CRUD oper
 **Poonam Bhavsar**
 M.Sc. IT (Software Development)
 Gujarat University
->>>>>>> 805d578605b125b10f18d2dd81a7f1a239a23608
+
